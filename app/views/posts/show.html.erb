@@ -1,0 +1,25 @@
+<h1>タイトル: <%= @post.title %></h1>
+<h2>投稿者: <%= @post.user.email %>さん</h2>
+
+<h3>本文</h3>
+<p><%= @post.body %></p>
+
+<h3>いいね件数: <%= @post.likes.count %></h3>
+
+<% if current_user.already_liked?(@post) %>
+  <%= button_to 'いいねを取り消す', post_like_path(@post), method: :delete %>
+<% else %>
+  <%= form_for [@post, @like] do |f| %>
+    <% if @like.errors.any? %>
+      <% @like.errors.full_messages.each do |msg| %>
+        <li style="color:red;"><%= msg %></li>
+      <% end %>
+    <% end %>
+    <%= f.submit 'いいね！' %>
+  <% end %>
+<% end %>
+
+<h2>この記事にいいねしたユーザー</h2>
+<% @post.liked_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
