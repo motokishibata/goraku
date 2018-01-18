@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'toppages/index'
+
   devise_for :users
   
   resources :users, only: [:index, :show] do
@@ -10,5 +12,5 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
   
-  root 'post#index'
+  root to: 'toppages#index'
 end
