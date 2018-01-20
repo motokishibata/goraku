@@ -23,3 +23,6 @@
 <% @post.liked_users.each do |user| %>
   <li><%= user.email %></li>
 <% end %>
+<%= link_to '新規投稿', new_user_post_path(user_id: current_user.id) %>
+<%= link_to '編集', edit_user_post_path(user_id: current_user.id) %>
+<%= link_to '削除', @post, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } %>
