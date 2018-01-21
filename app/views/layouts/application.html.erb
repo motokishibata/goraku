@@ -22,9 +22,14 @@
         <%= link_to 'ユーザー一覧', users_path %>
         <%= link_to '記事一覧', posts_path %>
         <%= link_to 'ホーム', root_path %>
-        <%= link_to '新規登録', new_user_registration_path %>
+        <% current_user.followers do |followers| %>
+        <ul>
+          <li><%= followers.email %></li>
+        </ul>
+        <% end %>
       <% else %>
         <%= link_to 'ログインはこちら', user_session_path %>
+        <%= link_to '新規登録', new_user_registration_path %>
       <% end %>
     </header>
     <div class="container">
